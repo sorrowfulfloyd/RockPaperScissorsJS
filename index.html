@@ -4,12 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TicTacToeJS</title>
+    <title>Rock Paper Scissors!</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <p>TicTacToeJS</p>
-    <p>Open the developer console to see the real deal!</p>
+    <div class="container">
+        <div class="topInfo">
+            <h4>Welcome to Rock Paper Scissors</h4>
+            <h5>To start select your move - best of 5</h5>
+        </div>
+
+        <div class="gameButtons">
+            <button onclick="game('rock')">Rock</button>
+            <button onclick="game('paper')">Paper</button>
+            <button onclick="game('scissors')">Scissors</button>
+        </div>
+
+        <div class="gameInfo">
+            <p id="compMove"></p>
+            <p id="beats">a</p>
+            <p id="playerScore">0</p>
+            <p id="computerScore">0</p>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 

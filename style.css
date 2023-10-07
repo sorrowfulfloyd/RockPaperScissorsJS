@@ -1,0 +1,49 @@
+* {
+    margin: auto;
+}
+
+.container {
+    border: 5px solid goldenrod;
+    /* width: 100vh; */
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin: 10px;
+    flex-flow: column wrap;
+}
+
+.topInfo {
+
+    border: 3px solid slateblue;
+    align-self: flex-start;
+    text-align: center;
+    /* padding: 5px; */
+    /* margin: 50px; */
+}
+
+.gameInfo {
+    border: 3px solid slateblue;
+    align-self: center;
+    text-align: center;
+    line-height: 50px;
+    margin-top: 10px;
+}
+
+.gameButtons {
+    border: 1.5px solid greenyellow;
+    display: flex;
+    justify-content: space-around;
+    height: 20vh;
+    width: 50vh;
+}
+
+.gameButtons button {
+    /* display: flex;
+    height: 5vh;
+    width: 15vh;
+    align-items: center;
+    justify-content: center;
+    align-content: center; */
+}

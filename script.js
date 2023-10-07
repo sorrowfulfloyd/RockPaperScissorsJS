@@ -1,60 +1,49 @@
+const compMove = document.getElementById("compMove")
+const beats = document.getElementById("beats")
+const playerScore = document.getElementById("playerScore")
+const computerScore = document.getElementById("computerScore")
+
+let comp = 0, plyr = 0;
+
 function getComputerChoice() {
-    const possibleChoices = ["Rock", "Paper", "Scissors"];
-    let move = possibleChoices[Math.floor(Math.random() * possibleChoices.length)].toLowerCase();
-    console.log("SECRET: computers move is: " + move)
+    const possibleChoices = ["rock", "paper", "scissors"];
+    let move = possibleChoices[Math.floor(Math.random() * possibleChoices.length)];
+    compMove.textContent = "Computer played: " + move;
     return move;
 };
 
-function playRound(computer, player) {
-    if (player == "rock" || player == "paper" || player == "scissors") {
-        if (computer == "rock" && player == "paper") { return "PbRp" }
-        else if (computer == "rock" && player == "scissors") { return "RbSc" }
+function playRound(player) {
+    let computer = getComputerChoice();
+    if (computer == "rock" && player == "paper") { beats.textContent = player + ' beats ' + computer; return 1; }
+    else if (computer == "rock" && player == "scissors") { beats.textContent = computer + ' beats ' + player; return 2 }
 
-        else if (computer == "paper" && player == "scissors") { return "SbPp" }
-        else if (computer == "paper" && player == "rock") { return "PbRc" }
+    else if (computer == "paper" && player == "scissors") { beats.textContent = player + ' beats ' + computer; return 1 }
+    else if (computer == "paper" && player == "rock") { beats.textContent = computer + ' beats ' + player; return 2 }
 
-        else if (computer == "scissors" && player == "rock") { return "RbSp" }
-        else if (computer == "scissors" && player == "paper") { return "SbPc" }
+    else if (computer == "scissors" && player == "rock") { beats.textContent = player + ' beats ' + computer; return 1 }
+    else if (computer == "scissors" && player == "paper") { beats.textContent = computer + ' beats ' + player; return 2 }
 
-        // Tie
-        else if (computer == "paper" && player == "paper") { return "PtPt" }
-        else if (computer == "rock" && player == "rock") { return "RtRt" }
-        else if (computer == "scissors" && player == "scissors") { return "StSt" }
-    }
-
-    else { return console.log("unknown entry: " + player) }
+    else if (computer == "paper" && player == "paper") { beats.textContent = player + ' ties ' + computer; return 0 }
+    else if (computer == "rock" && player == "rock") { beats.textContent = player + ' ties ' + computer; return 0 }
+    else if (computer == "scissors" && player == "scissors") { beats.textContent = player + ' ties ' + computer; return 0 }
 };
 
-function legitMove() {
-    MOVECHECKER: do {
-        let move = prompt("Your move, pick one! (ROCK or PAPER or SCISSORS)", "paper").toLowerCase()
-        if (move == "rock" || move == "paper" || move == "scissors") {
-            console.log("Got your move! It was: " + move);
-            return move;
-        } else {
-            alert("Unknown entry, remember you can only play: rock, paper, or scissors!")
-            continue MOVECHECKER;
-        }
-    } while (true)
+function game(move) {
+
+    let currentScore = playRound(move);
+    if (currentScore == 1) { plyr++; console.log("player: " + plyr) }
+    if (currentScore == 2) { comp++; console.log("computer: " + comp) }
+
+    playerScore.textContent = plyr;
+    computerScore.textContent = comp;
+
+    if (plyr == 5) { beats.textContent = "YOU WON, IT'S OVER!!"; resetScores() }
+    if (comp == 5) { beats.textContent = "YOU LOST, TRY AGANE"; resetScores() }
+};
+
+function resetScores() {
+    playerScore.textContent = 0;
+    computerScore.textContent = 0;
+    plyr = 0;
+    comp = 0;
 }
-
-function game() {
-    let result = [], comp = 0, plyr = 0, currentMove = "";
-    GAMELOOP: do {
-        if (comp == 3) { console.log("Computer won! Here are the results: " + result); break; }
-        else if (plyr == 3) { console.log("YOU won! Here are the results: " + result); break; }
-        else {
-            currentMove = playRound(getComputerChoice(), legitMove()).slice(-1);
-            if (currentMove !== "t") {
-                result += currentMove;
-                if (currentMove == "c") { comp++; console.log("Computer won this round!") }
-                else if (currentMove == "p") { plyr++; console.log("Player won this round!") }
-            } else {
-                console.log("You're tied with the computer, try again!");
-                continue GAMELOOP;
-            }
-        }
-    } while (true);
-};
-
-game();
